@@ -45,6 +45,9 @@ workflows:
     jobs: 
       - two
   second:
-    when: << pipeline.parameters.enable_value >>
+    when:
+      or:
+        - and:
+          - equal: ["every_hour", << pipeline.schedule.name >>]
     jobs:
       - one
