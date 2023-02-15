@@ -36,13 +36,14 @@ jobs:
           name: The second step
           command: |
             echo " the branch is - <<pipeline.git.branch >>"
+            echo "the pipeline source name - << pipeline.trigger_source >>"
             
 workflows: 
   version: 2
   pavan:
     jobs: 
-      - one
+      - two
   second:
     when: << pipeline.parameters.enable_value >>
     jobs:
-      - two
+      - one
