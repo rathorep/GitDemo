@@ -1,6 +1,6 @@
 version: 2.1
 jobs:
-  build:
+  one:
     docker:
       - image: alpine:3.15
         auth:
@@ -13,9 +13,23 @@ jobs:
           command: |
             echo 'Hello World!'
             echo 'set the environment variable'
+  two:
+    docker:
+      - image: naginx:latest
+    steps:         
       - run: 
           name: The second step
           command: |
             ls -lrt
+            
+workflows: 
+  version: 2
+  pavan:
+    jobs:
+      - one
+      - two:
+          requires:
+            - one
+
             
             
