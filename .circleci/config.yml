@@ -40,7 +40,9 @@ jobs:
 workflows: 
   version: 2
   pavan:
-    when: enable_value
     jobs: 
       - one
+  second:
+    when: << pipeline.parameters.enable_value >>
+    jobs:
       - two
