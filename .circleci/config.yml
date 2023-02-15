@@ -2,7 +2,7 @@ version: 2.1
 jobs:
   one:
     docker:
-      - image: alpine:3.15
+      - image: rathorep/casestudy:latest
  #       auth:
  #         username: rathorep
   #        password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
