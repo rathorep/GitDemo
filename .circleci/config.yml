@@ -15,7 +15,7 @@ jobs:
             echo 'set the environment variable'
   two:
     docker:
-      - image: naginx:latest
+      - image: nginx:latest
     steps:         
       - run: 
           name: The second step
