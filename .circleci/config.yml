@@ -38,6 +38,7 @@ jobs:
           command: |
             echo " the branch is - <<pipeline.git.branch >>"
             echo "the pipeline source name - << pipeline.trigger_source >>"
+            echo "the pipeline name is << pipeline.schedule.name >>"
             
 workflows: 
   version: 2
