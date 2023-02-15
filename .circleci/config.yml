@@ -10,9 +10,6 @@ parameters:
 
 jobs:
   one:
-    parameters:
-      image: 
-        type: string
     machine:
       image: ubuntu-2004:current
     environment:
@@ -35,12 +32,11 @@ jobs:
       - run: 
           name: The second step
           command: |
-            ls -lrt
+            echo " the branch is - <<pipeline.git.branch >>"
             
 workflows: 
   version: 2
   pavan:
     jobs: 
-      - one:
-          image: white_line 
+      - one
       - two
