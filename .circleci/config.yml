@@ -7,8 +7,15 @@ jobs:
           username: rathorep
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
+      - checkout
       - run:
           name: The First Step
           command: |
             echo 'Hello World!'
             echo 'set the environment variable'
+      - run: 
+          name: The second step
+          command: |
+            ls -lrt
+            man ls 
+            
