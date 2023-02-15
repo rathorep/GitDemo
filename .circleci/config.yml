@@ -17,5 +17,5 @@ jobs:
           name: The second step
           command: |
             ls -lrt
-            man ls 
+            
             
