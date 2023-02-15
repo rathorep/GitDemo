@@ -31,10 +31,6 @@ workflows:
             branches:
               only:
                 - circleci-project-setup
-      - hold: 
-          type: approval
-          requires:
-            - one
       - two:
           requires:
             - hold
