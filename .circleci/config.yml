@@ -27,7 +27,8 @@ jobs:
           command: |
             echo "Hello World! - ${IMAGE_NAME_TAG}"
             echo "the value of branch name is - << pipeline.parameters.branch_name >>"
-          
+      
+      
   two:
     docker:
       - image: nginx:latest
