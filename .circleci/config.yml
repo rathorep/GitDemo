@@ -9,38 +9,18 @@ parameters:
     default: "main"  
 
 jobs:
-  one:
+  build:
     machine:
       image: ubuntu-2004:current
-    environment:
-      IMAGE_NAME_TAG: << pipeline.parameters.image_tag >>
-    working_directory: << pipeline.parameters.branch_name >>
- #       auth:
- #         username: rathorep
-  #        password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run:
           name: The First Step
           command: |
-            echo "Hello World! - ${IMAGE_NAME_TAG}"
-            echo "the value of branch name is - ${working_directory}"
-          
-  two:
-    docker:
-      - image: nginx:latest
-    steps:         
-      - run: 
-          name: The second step
-          command: |
-            ls -lrt
-            
-workflows: 
-  version: 2
-  pavan:
-    jobs: 
-      - one
-      - two
+            echo "Hello World! - << pipeline.parameters.image_tag >>"
+            echo "the value of branch name is - << pipeline.parameters.branch_name >>"
+
+
 
       
           
