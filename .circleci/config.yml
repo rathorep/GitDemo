@@ -1,53 +1,25 @@
 version: 2.1
 
-parameters:
-  image_tag:
-    type: string
-    default: "casestudy1"
-  branch_name:
-    type: string
-    default: "main"
-  enable_value:
-    type: boolean
-    default: false   
-
-jobs:
-  one:
+jobs: # conditional steps may also be defined in `commands:`
+  job_with_optional_custom_checkout:
+    parameters:
+      custom_checkout:
+        type: string
+        default: ""
     machine:
-      image: ubuntu-2004:current
-    environment:
-      IMAGE_NAME_TAG: << pipeline.parameters.image_tag >>
- #       auth:
- #         username: rathorep
-  #        password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      image: ubuntu-2004:202107-02
     steps:
-      - checkout
-      - run:
-          name: The First Step
-          command: |
-            echo "Hello World! - ${IMAGE_NAME_TAG}"
-            echo "the value of branch name is - << pipeline.parameters.branch_name >>"
-      
-      
-  two:
-    docker:
-      - image: nginx:latest
-    steps:         
-      - run: 
-          name: The second step
-          command: |
-            echo " the branch is - <<pipeline.git.branch >>"
-            echo "the pipeline source name - << pipeline.trigger_source >>"
-            echo "the pipeline name is - << pipeline.schedule.name >>"
-            
-workflows: 
-  version: 2
-  pavan:
-    jobs: 
-      - two
-  second:
-    when:
-      and: 
-        - equal: ["every_hour", << pipeline.schedule.name >>]
+      - when:
+          condition: <<parameters.custom_checkout>>
+          steps:
+            - run: echo "my custom checkout"
+      - unless:
+          condition: <<parameters.custom_checkout>>
+          steps:
+            - checkout
+workflows:
+  build-test-deploy:
     jobs:
-      - one
+      - job_with_optional_custom_checkout:
+          custom_checkout: "any non-empty string is truthy"
+      - job_with_optional_custom_checkout
