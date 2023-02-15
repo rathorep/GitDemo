@@ -3,9 +3,9 @@ jobs:
   one:
     docker:
       - image: alpine:3.15
-        auth:
-          username: rathorep
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+ #       auth:
+ #         username: rathorep
+  #        password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run:
