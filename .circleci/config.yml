@@ -47,8 +47,7 @@ workflows:
       - two
   second:
     when:
-      or:
-        - and:
-          - equal: ["every_hour", << pipeline.schedule.name >>]
+      and: 
+        - equal: ["every_hour", << pipeline.schedule.name >>]
     jobs:
       - one
