@@ -27,9 +27,8 @@ workflows:
   pavan:
     jobs:
       - one
-      - two:
-          requires:
-            - one
+      - two
+          
 
             
             
