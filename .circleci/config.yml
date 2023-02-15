@@ -6,7 +6,10 @@ parameters:
     default: "casestudy1"
   branch_name:
     type: string
-    default: "main"  
+    default: "main"
+  enable_value:
+    type: boolean
+    default: false   
 
 jobs:
   one:
@@ -37,6 +40,7 @@ jobs:
 workflows: 
   version: 2
   pavan:
+    when: enable_value
     jobs: 
       - one
       - two
