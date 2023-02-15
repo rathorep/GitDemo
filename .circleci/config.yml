@@ -1,8 +1,20 @@
 version: 2.1
+
+parameters:
+  image_tag:
+    type: string
+    default: "casestudy1"
+  branch_name:
+    type: string
+    default: "main"  
+
 jobs:
   one:
     machine:
       image: ubuntu-2004:current
+    environment:
+      IMAGE_NAME_TAG: << pipeline.parameters.image_tag >>
+    working_directory: << pipeline.parameters.branch_name >>
  #       auth:
  #         username: rathorep
   #        password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -11,8 +23,9 @@ jobs:
       - run:
           name: The First Step
           command: |
-            echo 'Hello World!'
-            echo 'set the environment variable'
+            echo "Hello World! - ${IMAGE_NAME_TAG}"
+            echo "the value of branch name is - ${working_directory}"
+          
   two:
     docker:
       - image: nginx:latest
@@ -26,14 +39,8 @@ workflows:
   version: 2
   pavan:
     jobs: 
-      - one:
-          filters:
-            branches:
-              only:
-                - circleci-project-setup
-      - two:
-          requires:
-            - one
+      - one
+      - two
 
       
           
