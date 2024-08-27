@@ -17,7 +17,7 @@ spec:
       terminationGracePeriodSeconds: 10
       containers:
       - name: nginx
-        image: Arnav:v1
+        image: rathore:v1
         command: ["/bin/sh"]
         args: ["-c", "sleep 9d"]
         ports:
